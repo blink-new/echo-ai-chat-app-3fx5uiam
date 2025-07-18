@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+
+    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* Dark midnight gradient background - ChatGPT inspired */
+.gradient-bg {
+  background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #21262d 100%);
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 50%, rgb(88 166 255 / 8%) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgb(139 92 246 / 6%) 0%, transparent 50%),
+              radial-gradient(circle at 40% 80%, rgb(34 197 94 / 4%) 0%, transparent 50%);
+  animation: gradient-shift 25s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { opacity: 40%; }
+  50% { opacity: 70%; }
+}
+
+/* Glassmorphic card styles - darker midnight theme */
+.glass-card {
+  background: rgb(255 255 255 / 3%);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgb(255 255 255 / 8%);
+  border-radius: 1rem;
+}
+
+.glass-card-light {
+  background: rgb(255 255 255 / 2%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgb(255 255 255 / 6%);
+  border-radius: 1rem;
+}
+
+/* Voice recording animation */
+.pulse-ring {
+  animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.33);
+  }
+
+  40%, 50% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 0%;
+    transform: scale(1.2);
+  }
+}
+
+/* Drag and drop styles */
+.drag-active {
+  border-color: rgb(88 166 255 / 60%);
+  background: rgb(88 166 255 / 8%);
+}
+
+.drag-accept {
+  border-color: rgb(34 197 94 / 60%);
+  background: rgb(34 197 94 / 8%);
+}
+
+.drag-reject {
+  border-color: rgb(239 68 68 / 60%);
+  background: rgb(239 68 68 / 8%);
+}
+
+/* Storyboard animations */
+@keyframes slide-in-from-bottom {
+  from {
+    opacity: 0%;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 100%;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: slide-in-from-bottom 0.5s ease-out;
+}
+
+.slide-in-from-bottom-4 {
+  animation: slide-in-from-bottom 0.5s ease-out;
+}
+
+/* Mobile optimizations */
+@media (width <= 640px) {
+  /* Improve touch targets */
+  .glass-card {
+    min-height: 44px; /* iOS recommended minimum touch target */
+  }
+  
+  /* Prevent zoom on input focus */
+  input[type="text"] {
+    font-size: 16px;
+  }
+  
+  /* Better scrolling on mobile */
+  .overflow-y-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+}
